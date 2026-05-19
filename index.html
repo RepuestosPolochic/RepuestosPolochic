@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Repuestos Polochic | Telemán, Alta Verapaz</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --blue:    #0a3d6b;
+            --blue2:   #0f5499;
+            --yellow:  #f5a700;
+            --yellow2: #ffc93c;
+            --dark:    #0d1b2a;
+            --gray:    #f0f4f8;
+            --muted:   #6b7a8d;
+            --white:   #ffffff;
+            --red:     #c0392b;
+        }
+        *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Barlow', sans-serif;
+            background: var(--white);
+            color: #1a2535;
+            overflow-x: hidden;
+        }
+
+        /* ─── NOISE TEXTURE OVERLAY ─── */
+        body::before {
+            content: '';
+            position: fixed; inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 9999;
+            opacity: .4;
+        }
+
+        /* ─── HEADER ─── */
+        header {
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+            background: var(--dark);
+            border-bottom: 3px solid var(--yellow);
+        }
+        .nav-wrap {
+            max-width: 1240px; margin: 0 auto;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0 5%;
+            height: 68px;
+        }
+        .logo {
+            display: flex; align-items: center; gap: 12px;
+            text-decoration: none;
+        }
+        .logo-icon {
+            width: 42px; height: 42px;
+            background: var(--yellow);
+            border-radius: 6px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.3rem; color: var(--dark);
+        }
+        .logo-text {
+            display: flex; flex-direction: column; line-height: 1.1;
+        }
+        .logo-text strong {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1.3rem; font-weight: 900;
+            color: var(--white); letter-spacing: 1px;
+        }
+        .logo-text span {
+            font-size: 0.7rem; color: var(--yellow);
+            letter-spacing: 2px; text-transform: uppercase;
+        }
+
+        nav { display: flex; align-items: center; gap: 6px; }
+        nav a {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 0.9rem; font-weight: 600;
+            color: #94a3b8; text-decoration: none;
+            letter-spacing: 1px; text-transform: uppercase;
+            padding: 6px 12px; border-radius: 4px;
+            transition: color .25s, background .25s;
+        }
+        nav a:hover { color: var(--yellow); background: rgba(245,167,0,.08); }
+        
+        nav a.active-nav {
+            color: var(--yellow);
+            background: rgba(245,167,0,.12);
+        }
+
+        nav a.btn-cta {
+            background: var(--yellow); color: var(--dark);
+            font-weight: 700; margin-left: 8px;
+        }
+        nav a.btn-cta:hover { background: var(--yellow2); }
+
+        .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+        .hamburger span {
+            display: block; width: 24px; height: 2px;
+            background: var(--white); margin: 5px 0;
+            transition: transform .3s, opacity .3s;
+        }
+
+        /* ─── HERO ─── */
+        .hero {
+            position: relative;
+            height: 100vh; min-height: 600px;
+            margin-top: 68px;
+            display: flex; align-items: center; justify-content: center;
+            overflow: hidden;
+        }
+        .hero-bg {
+            position: absolute; inset: 0;
+            background: url('assets/hero/fondo-hero.jpg') center/cover no-repeat;
+        }
+        .hero-bg::after {
+            content: '';
+            position: absolute; inset: 0;
+            background: linear-gradient(135deg, rgba(10,61,107,.92) 0%, rgba(13,27,42,.85) 60%, rgba(245,167,0,.15) 100%);
+        }
+        .hero::after {
+            content: '';
+            position: absolute; bottom: -2px; left: 0; right: 0;
+            height: 80px;
+            background: var(--white);
+            clip-path: polygon(0 100%, 100% 0, 100% 100%);
+        }
+        .hero-content {
+            position: relative; z-index: 2;
+            text-align: center;
+            max-width: 820px; padding: 0 5%;
+        }
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: rgba(245,167,0,.15);
+            border: 1px solid rgba(245,167,0,.4);
+            color: var(--yellow);
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 0.85rem; font-weight: 700; letter-spacing: 3px;
+            padding: 6px 18px; border-radius: 100px;
+            margin-bottom: 22px;
+            animation: fadeUp .6s ease both;
+        }
+        .hero h1 {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: clamp(2.4rem, 7vw, 5.2rem);
+            font-weight: 900; line-height: 1;
+            color: var(--white);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            animation: fadeUp .7s .1s ease both;
+            margin-bottom: 20px;
+        }
+        .hero h1 em { color: var(--yellow); font-style: normal; }
+        .hero-sub {
+            font-size: 1.1rem; color: #cbd5e1;
+            max-width: 580px; margin: 0 auto 36px;
+            animation: fadeUp .7s .2s ease both;
+            font-style: italic;
+        }
+        .hero-actions {
+            display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;
+            animation: fadeUp .7s .3s ease both;
+        }
+        .btn-wa {
+            display: inline-flex; align-items: center; gap: 10px;
+            background: #25d366; color: var(--white);
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1rem; font-weight: 700; letter-spacing: 1px;
+            text-decoration: none; padding: 14px 28px; border-radius: 6px;
+            transition: transform .2s, background .2s;
+            box-shadow: 0 8px 20px rgba(37,211,102,.35);
+        }
+        .btn-wa:hover { transform: translateY(-3px); background: #1fb855; }
+        .btn-sec {
+            display: inline-flex; align-items: center; gap: 10px;
+            background: transparent;
+            border: 2px solid rgba(255,255,255,.35);
+            color: var(--white);
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1rem; font-weight: 700; letter-spacing: 1px;
+            text-decoration: none; padding: 13px 28px; border-radius: 6px;
+            transition: border-color .2s, background .2s;
+        }
+        .btn-sec:hover { border-color: var(--yellow); background: rgba(245,167,0,.1); }
+
+        .hero-stats {
+            position: absolute; bottom: 100px; left: 50%;
+            transform: translateX(-50%);
+            display: flex; gap: 0;
+            background: rgba(255,255,255,.07);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,.12);
+            border-radius: 10px; overflow: hidden;
+            z-index: 2;
+            animation: fadeUp .8s .4s ease both;
+        }
+        .stat-item {
+            padding: 18px 32px; text-align: center;
+            border-right: 1px solid rgba(255,255,255,.12);
+        }
+        .stat-item:last-child { border-right: none; }
+        .stat-num {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 2rem; font-weight: 900; color: var(--yellow);
+            line-height: 1;
+        }
+        .stat-label { font-size: .75rem; color: #94a3b8; letter-spacing: 1px; margin-top: 3px; }
+
+        /* ─── SECTION SHELL ─── */
+        .section { padding: 90px 5%; }
+        .container { max-width: 1200px; margin: 0 auto; }
+
+        .section-tag {
+            display: inline-flex; align-items: center; gap: 8px;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: .78rem; font-weight: 700; letter-spacing: 3px;
+            color: var(--yellow); text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+        .section-tag::before {
+            content: ''; display: block;
+            width: 24px; height: 2px; background: var(--yellow);
+        }
+        .section-title {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-weight: 900; color: var(--blue);
+            text-transform: uppercase; line-height: 1.05;
+            margin-bottom: 20px;
+        }
+        .section-title span { color: var(--yellow); }
+
+        /* ─── ABOUT ─── */
+        .about { background: var(--white); }
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 70px; align-items: center;
+        }
+        .about-img-wrap {
+            position: relative; border-radius: 12px; overflow: hidden;
+        }
+        .about-img-wrap img {
+            width: 100%; height: 480px;
+            object-fit: cover; display: block;
+            border-radius: 12px;
+            filter: saturate(.9);
+        }
+        .about-img-badge {
+            position: absolute; bottom: 24px; left: 24px;
+            background: var(--yellow);
+            color: var(--dark);
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1rem; font-weight: 800;
+            letter-spacing: 1px;
+            padding: 12px 20px; border-radius: 8px;
+            box-shadow: 0 4px 16px rgba(0,0,0,.3);
+            display: flex; align-items: center; gap: 10px;
+        }
+        .about-img-frame {
+            position: absolute; inset: 0;
+            border-radius: 12px;
+            box-shadow: inset 0 0 0 3px rgba(245,167,0,.25);
+            pointer-events: none;
+        }
+        .about-body p {
+            color: #4a5568; font-size: 1rem; line-height: 1.75;
+            margin-bottom: 18px;
+        }
+        .about-checks {
+            margin-top: 28px;
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+        .check-item {
+            display: flex; align-items: flex-start; gap: 10px;
+        }
+        .check-icon {
+            width: 28px; height: 28px; min-width: 28px;
+            background: rgba(245,167,0,.12);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--yellow); font-size: .75rem;
+        }
+        .check-item p { font-size: .9rem; color: var(--muted); margin: 0; line-height: 1.4; }
+
+        /* ─── SERVICES ─── */
+        .services { background: var(--dark); position: relative; overflow: hidden; }
+        .services .section-title { color: var(--white); }
+        .services::before {
+            content: 'SERVICIOS';
+            position: absolute; right: -40px; top: 50%;
+            transform: translateY(-50%) rotate(90deg);
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 9rem; font-weight: 900;
+            color: rgba(255,255,255,.03);
+            letter-spacing: 8px;
+            pointer-events: none;
+        }
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 2px; margin-top: 48px;
+            border: 2px solid rgba(255,255,255,.06);
+            border-radius: 12px; overflow: hidden;
+        }
+        .srv-card {
+            background: rgba(255,255,255,.03);
+            padding: 40px 28px;
+            transition: background .3s;
+            position: relative;
+        }
+        .srv-card::after {
+            content: '';
+            position: absolute; bottom: 0; left: 0; right: 0;
+            height: 3px; background: var(--yellow);
+            transform: scaleX(0); transition: transform .3s;
+            transform-origin: left;
+        }
+        .srv-card:hover { background: rgba(245,167,0,.07); }
+        .srv-card:hover::after { transform: scaleX(1); }
+        .srv-num {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 3.5rem; font-weight: 900;
+            color: rgba(245,167,0,.15);
+            line-height: 1; margin-bottom: 20px;
+        }
+        .srv-icon {
+            width: 50px; height: 50px;
+            background: rgba(245,167,0,.12);
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.3rem; color: var(--yellow);
+            margin-bottom: 16px;
+        }
+        .srv-card h4 {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1.25rem; font-weight: 700;
+            color: var(--white); margin-bottom: 10px;
+            text-transform: uppercase; letter-spacing: .5px;
+        }
+        .srv-card p { font-size: .9rem; color: #64748b; line-height: 1.6; }
+
+        /* ─── CATALOG ─── */
+        .catalog { background: var(--gray); }
+        .catalog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 22px;
+            margin-top: 48px;
+        }
+        .cat-card {
+            background: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(0,0,0,.06);
+            transition: transform .3s, box-shadow .3s;
+        }
+        .cat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0,0,0,.1);
+        }
+        .cat-img {
+            height: 180px; overflow: hidden; position: relative;
+        }
+        .cat-img img {
+            width: 100%; height: 100%; object-fit: cover;
+            transition: transform .5s;
+        }
+        .cat-card:hover .cat-img img { transform: scale(1.07); }
+        .cat-img-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(to top, rgba(10,61,107,.6) 0%, transparent 60%);
+        }
+        .cat-img-icon {
+            position: absolute; bottom: 14px; left: 18px;
+            font-size: 1.6rem; color: var(--yellow);
+            z-index: 1;
+        }
+        .cat-body { padding: 22px 22px 26px; }
+        .cat-body h5 {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1.15rem; font-weight: 800;
+            color: var(--blue); text-transform: uppercase;
+            letter-spacing: .5px; margin-bottom: 14px;
+        }
+        .cat-body ul { list-style: none; }
+        .cat-body ul li {
+            display: flex; align-items: flex-start; gap: 8px;
+            font-size: .88rem; color: var(--muted);
+            margin-bottom: 8px; line-height: 1.45;
+        }
+        .cat-body ul li::before {
+            content: '→';
+            color: var(--yellow); font-weight: 700;
+            min-width: 14px; margin-top: 1px;
+        }
+        .cat-body ul li strong { color: #334155; }
+
+        .brand-pills {
+            display: flex; flex-wrap: wrap; gap: 6px;
+            margin-top: 18px; padding-top: 14px;
+            border-top: 1px dashed #e2e8f0;
+        }
+        .brand-pill {
+            font-size: .72rem; font-weight: 700;
+            color: var(--blue2); background: rgba(15,84,153,.08);
+            padding: 3px 10px; border-radius: 100px;
+            letter-spacing: .5px;
+        }
+
+        /* ─── BRANDS MARQUEE ─── */
+        .brands-section { background: var(--white); padding: 60px 0; overflow: hidden; }
+        .brands-label {
+            text-align: center;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: .8rem; font-weight: 700; letter-spacing: 4px;
+            color: var(--muted); text-transform: uppercase;
+            margin-bottom: 36px;
+        }
+        .marquee-track {
+            display: flex; gap: 0;
+            animation: marquee 22s linear infinite;
+            width: max-content;
+        }
+        .marquee-track:hover { animation-play-state: paused; }
+        .brand-logo-item {
+            padding: 0 48px;
+            display: flex; align-items: center;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1.3rem; font-weight: 800;
+            color: #94a3b8; letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: color .3s;
+            white-space: nowrap;
+        }
+        .brand-logo-item:hover { color: var(--blue); }
+        .brand-sep { color: var(--yellow); margin: 0 6px; font-size: 1rem; }
+
+        @keyframes marquee {
+            from { transform: translateX(0); }
+            to   { transform: translateX(-50%); }
+        }
+
+        /* ─── CONTACT / FOOTER ─── */
+        .contact-strip {
+            background: var(--blue);
+            padding: 70px 5%;
+            position: relative; overflow: hidden;
+        }
+        .contact-strip::before {
+            content: '';
+            position: absolute; inset: 0;
+            background: url('https://images.unsplash.com/photo-1573100925118-870b8efc799d?q=80&w=1200') center/cover no-repeat;
+            opacity: .08;
+        }
+        .contact-inner {
+            max-width: 1200px; margin: 0 auto;
+            position: relative; z-index: 1;
+            display: grid; grid-template-columns: 1fr auto;
+            gap: 40px; align-items: center;
+        }
+        .contact-inner h2 {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 900;
+            color: var(--white); text-transform: uppercase; line-height: 1.05;
+        }
+        .contact-inner h2 span { color: var(--yellow); }
+        .contact-inner p { color: rgba(255,255,255,.7); margin-top: 10px; font-size: 1rem; }
+        .contact-actions { display: flex; flex-direction: column; gap: 12px; align-items: flex-end; }
+
+        footer {
+            background: var(--dark);
+            padding: 50px 5% 30px;
+        }
+        .footer-grid {
+            max-width: 1200px; margin: 0 auto;
+            display: grid; grid-template-columns: 2fr 1fr 1fr;
+            gap: 50px; margin-bottom: 40px;
+        }
+        .footer-brand strong {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1.5rem; font-weight: 900;
+            color: var(--white); letter-spacing: 1px; display: block;
+            margin-bottom: 12px;
+        }
+        .footer-brand p { font-size: .9rem; color: #64748b; line-height: 1.6; }
+        .footer-col h6 {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1rem; font-weight: 700; letter-spacing: 2px;
+            color: var(--yellow); text-transform: uppercase; margin-bottom: 16px;
+        }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 10px; }
+        .footer-col ul li a, .footer-col ul li span {
+            font-size: .9rem; color: #64748b;
+            text-decoration: none; transition: color .2s;
+            display: flex; align-items: center; gap: 8px;
+        }
+        .footer-col ul li a:hover { color: var(--white); }
+        .footer-col ul li i { color: var(--yellow); font-size: .8rem; }
+        .footer-bottom {
+            max-width: 1200px; margin: 0 auto;
+            border-top: 1px solid rgba(255,255,255,.07);
+            padding-top: 24px;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .footer-bottom p { font-size: .8rem; color: #374151; }
+
+        /* ─── FLOATING WA BUTTON ─── */
+        .float-wa {
+            position: fixed; bottom: 28px; right: 28px;
+            width: 58px; height: 58px;
+            background: #25d366;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.6rem; color: var(--white);
+            text-decoration: none;
+            box-shadow: 0 4px 20px rgba(37,211,102,.45);
+            z-index: 900;
+            transition: transform .2s, background .2s;
+            animation: pulse 2.5s infinite;
+        }
+        .float-wa:hover { transform: scale(1.1); background: #1fb855; }
+
+        @keyframes pulse {
+            0%,100% { box-shadow: 0 4px 20px rgba(37,211,102,.45); }
+            50%      { box-shadow: 0 4px 30px rgba(37,211,102,.7); }
+        }
+
+        /* ─── ANIMATIONS ─── */
+        @keyframes fadeUp {
+            from { opacity:0; transform: translateY(24px); }
+            to   { opacity:1; transform: translateY(0); }
+        }
+        .reveal {
+            opacity: 0; transform: translateY(32px);
+            transition: opacity .7s ease, transform .7s ease;
+        }
+        .reveal.visible { opacity: 1; transform: none; }
+
+        /* ─── MOBILE ─── */
+        @media (max-width: 900px) {
+            .about-grid { grid-template-columns: 1fr; gap: 40px; }
+            .about-img-wrap img { height: 320px; }
+            .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+            .contact-inner { grid-template-columns: 1fr; }
+            .contact-actions { align-items: flex-start; }
+            .hero-stats { display: none; }
+        }
+        @media (max-width: 680px) {
+            nav { display: none; position: absolute; top: 68px; left: 0; right: 0;
+                  background: var(--dark); flex-direction: column; padding: 16px 0;
+                  border-top: 2px solid var(--yellow); gap: 0; }
+            nav.open { display: flex; }
+            nav a { padding: 12px 5%; border-radius: 0; }
+            .hamburger { display: block; }
+            .about-checks { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<header id="top">
+    <div class="nav-wrap">
+        <a href="#top" class="logo">
+            <div class="logo-icon"><i class="fas fa-gears"></i></div>
+            <div class="logo-text">
+                <strong>Repuestos Polochic</strong>
+                <span>Telemán · Alta Verapaz</span>
+            </div>
+        </a>
+        <button class="hamburger" id="hbtn" aria-label="Menú">
+            <span></span><span></span><span></span>
+        </button>
+        <nav id="nav">
+            <a href="#nosotros">Nosotros</a>
+            <a href="#servicios">Servicios</a>
+            <a href="#catalogo">Catálogo</a>
+            <a href="https://wa.me/50238974966" target="_blank" class="btn-cta">
+                <i class="fab fa-whatsapp"></i> WhatsApp
+            </a>
+        </nav>
+    </div>
+</header>
+
+<section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+        <div class="hero-badge"><i class="fas fa-map-marker-alt"></i> Telemán, Panzós, Alta Verapaz</div>
+        <h1>Tu Repuesto<br><em>Siempre Disponible</em></h1>
+        <p class="hero-sub">Líderes en la venta de repuestos para vehículo medio, pesado, lubricantes y bicicletas desde hace más de 40 años.</p>
+        <div class="hero-actions">
+            <a href="https://wa.me/50238974966" target="_blank" class="btn-wa">
+                <i class="fab fa-whatsapp"></i> Consultar por WhatsApp
+            </a>
+            <a href="#catalogo" class="btn-sec">
+                <i class="fas fa-th-large"></i> Ver Catálogo
+            </a>
+        </div>
+    </div>
+    <div class="hero-stats">
+        <div class="stat-item">
+            <div class="stat-num">40+</div>
+            <div class="stat-label">Años de experiencia</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-num">6</div>
+            <div class="stat-label">Líneas de productos</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-num">10+</div>
+            <div class="stat-label">Marcas líderes</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-num">L–S</div>
+            <div class="stat-label">7 AM – 6 PM</div>
+        </div>
+    </div>
+</section>
+
+<section id="nosotros" class="section about">
+    <div class="container">
+        <div class="about-grid">
+            <div class="about-img-wrap reveal">
+                <img src="assets/hero/taller.jpg" alt="Aceitera y Ferretería Polochic">
+                <div class="about-img-frame"></div>
+                <div class="about-img-badge">
+                    <i class="fas fa-award"></i> ACEITERA Y FERRETERIA POLOCHIC
+                </div>
+            </div>
+            <div class="about-body reveal">
+                <p class="section-tag">Quiénes somos</p>
+                <h2 class="section-title">Negocio con <span>Raíces en el Polochic</span></h2>
+                <p>Somos un negocio fundado en Telemán, Panzós, Alta Verapaz, con una trayectoria impecable de más de 40 años en el mercado automotriz. Nos dedicamos a ofrecer soluciones inmediatas y confiables para el transporte de nuestra comunidad.</p>
+                <p>Trabajamos continuamente para mantener los más altos estándares de calidad, con un inventario robusto de repuestos garantizados, consumibles y herramientas para mecánicos, empresas de logística pesada y el público en general.</p>
+                <div class="about-checks">
+                    <div class="check-item">
+                        <div class="check-icon"><i class="fas fa-check"></i></div>
+                        <p>Stock permanente y abastecido</p>
+                    </div>
+                    <div class="check-item">
+                        <div class="check-icon"><i class="fas fa-check"></i></div>
+                        <p>Repuestos con garantía</p>
+                    </div>
+                    <div class="check-item">
+                        <div class="check-icon"><i class="fas fa-check"></i></div>
+                        <p>Repuestos para 22r y camioncitos</p>
+                    </div>
+                    <div class="check-item">
+                        <div class="check-icon"><i class="fas fa-check"></i></div>
+                        <p>Dist. Bicicletas Maya Tour</p>
+                    </div>
+                    <div class="check-item">
+                        <div class="check-icon"><i class="fas fa-check"></i></div>
+                        <p>10+ marcas internacionales</p>
+                    </div>
+                    <div class="check-item">
+                        <div class="check-icon"><i class="fas fa-check"></i></div>
+                        <p>Variedad de productos</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="servicios" class="section services">
+    <div class="container">
+        <p class="section-tag" style="color:var(--yellow)">Lo que hacemos</p>
+        <h2 class="section-title">Nuestros <span>Servicios</span></h2>
+        <div class="services-grid reveal">
+            <div class="srv-card">
+                <div class="srv-num">01</div>
+                <div class="srv-icon"><i class="fas fa-screwdriver-wrench"></i></div>
+                <h4>Venta de Repuestos</h4>
+                <p>Más de 40 años respaldando al sector automotriz y de transporte local con repuestos garantizados de las mejores marcas.</p>
+            </div>
+            <div class="srv-card">
+                <div class="srv-num">02</div>
+                <div class="srv-icon"><i class="fas fa-truck"></i></div>
+                <h4>Transporte Pesado</h4>
+                <p>Especialistas en cruces de 5, 6, 7 y 8 pulgadas, chimbos traseros #30 y delanteros #24 para toda flota comercial.</p>
+            </div>
+            <div class="srv-card">
+                <div class="srv-num">03</div>
+                <div class="srv-icon"><i class="fas fa-truck-pickup"></i></div>
+                <h4>Carro Mediano</h4>
+                <p>Soporte completo para Toyota 22R, 4x4, 2WD, Nissan Urvan y Mitsubishi L200. La pieza correcta, siempre.</p>
+            </div>
+            <div class="srv-card">
+                <div class="srv-num">04</div>
+                <div class="srv-icon"><i class="fas fa-oil-can"></i></div>
+                <h4>Lubricantes</h4>
+                <p>Amplia variedad de aceites, aditivos y grasas de marcas líderes para la máxima protección de motores de trabajo.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="catalogo" class="section catalog">
+    <div class="container">
+        <p class="section-tag">Nuestros productos</p>
+        <h2 class="section-title">Catálogo <span>Completo</span></h2>
+        <div class="catalog-grid">
+
+            <div class="cat-card reveal">
+                <div class="cat-img">
+                    <img src="assets/catalogo/lubricantes.jpg" alt="Lubricantes, Aceites y Grasas">
+                    <div class="cat-img-overlay"></div>
+                    <div class="cat-img-icon"><i class="fas fa-oil-can"></i></div>
+                </div>
+                <div class="cat-body">
+                    <h5>Lubricantes, Aceites y Grasas</h5>
+                    <ul>
+                        <li><strong>Formatos:</strong> Cubetas, galones y litros para todo tipo de vehículo.</li>
+                        <li><strong>Viscosidades:</strong> 15W-40 y aditivos eficientes para catarina.</li>
+                        <li><strong>Grasas:</strong> Alta temperatura y multiusos para chasis y rodamientos.</li>
+                    </ul>
+                    <div class="brand-pills">
+                        <span class="brand-pill">Delo</span>
+                        <span class="brand-pill">Castrol</span>
+                        <span class="brand-pill">Shell</span>
+                        <span class="brand-pill">Motul</span>
+                        <span class="brand-pill">Mobil</span>
+                        <span class="brand-pill">Ursa</span>
+                        <span class="brand-pill">Quaker</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cat-card reveal">
+                <div class="cat-img">
+                    <img src="assets/catalogo/motor.jpg" alt="Motor, Filtración y Empaques">
+                    <div class="cat-img-overlay"></div>
+                    <div class="cat-img-icon"><i class="fas fa-faucet-drip"></i></div>
+                </div>
+                <div class="cat-body">
+                    <h5>Motor, Filtración y Empaques</h5>
+                    <ul>
+                        <li><strong>Filtros:</strong> Aceite, diesel y aire para vehículos ligeros y camiones de gran tonelaje.</li>
+                        <li><strong>Empaques:</strong> Juegos completos, especialistas en Toyota 22R.</li>
+                        <li><strong>Cables y accesorios:</strong> Componentes mecánicos de bloque.</li>
+                    </ul>
+                    <div class="brand-pills">
+                        <span class="brand-pill">Toyota 22R</span>
+                        <span class="brand-pill">Nissan</span>
+                        <span class="brand-pill">Mitsubishi</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cat-card reveal">
+                <div class="cat-img">
+                    <img src="assets/catalogo/fajas.jpg" alt="Fajas y Retenedores">
+                    <div class="cat-img-overlay"></div>
+                    <div class="cat-img-icon"><i class="fas fa-circle-notch"></i></div>
+                </div>
+                <div class="cat-body">
+                    <h5>Fajas y Retenedores</h5>
+                    <ul>
+                        <li><strong>Retenedores:</strong> Stock permanente en medidas estándar, milimétricas y especiales.</li>
+                        <li><strong>Fajas lisas, con dientes y de tiempo</strong> de alta resistencia.</li>
+                        <li><strong>Multi-canal:</strong> Tipo 4PK890 y similares de uso común.</li>
+                    </ul>
+                    <div class="brand-pills">
+                        <span class="brand-pill">Gates</span>
+                        <span class="brand-pill">Dayco</span>
+                        <span class="brand-pill">Continental</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cat-card reveal">
+                <div class="cat-img">
+                    <img src="assets/catalogo/frenos.jpg" alt="Frenos, Suspensión y Tren Delantero">
+                    <div class="cat-img-overlay"></div>
+                    <div class="cat-img-icon"><i class="fas fa-circle-half-stroke"></i></div>
+                </div>
+                <div class="cat-body">
+                    <h5>Frenos, Suspensión y Tren Delantero</h5>
+                    <ul>
+                        <li><strong>Frenado:</strong> Pastillas, discos ventilados/sólidos, líquido y cables.</li>
+                        <li><strong>Suspensión:</strong> Cojinetes, rótulas, brazos, terminales y bushines.</li>
+                        <li><strong>Cables:</strong> Clutch, freno y velocímetro.</li>
+                    </ul>
+                    <div class="brand-pills">
+                        <span class="brand-pill">Bendix</span>
+                        <span class="brand-pill">Brembo</span>
+                        <span class="brand-pill">Monroe</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cat-card reveal">
+                <div class="cat-img">
+                    <img src="assets/catalogo/carroceria.jpg" alt="Carrocería, Muelles e Iluminación">
+                    <div class="cat-img-overlay"></div>
+                    <div class="cat-img-icon"><i class="fas fa-truck-pickup"></i></div>
+                </div>
+                <div class="cat-body">
+                    <h5>Carrocería, Muelles e Iluminación</h5>
+                    <ul>
+                        <li><strong>Toyota 22R:</strong> Persianas de radiador, bumpers y empaques específicos.</li>
+                        <li><strong>Hojas de resorte</strong> para pickups y vehículos comerciales.</li>
+                        <li><strong>Retrovisores, luces de posición</strong> y lámparas variadas.</li>
+                    </ul>
+                    <div class="brand-pills">
+                        <span class="brand-pill">Toyota</span>
+                        <span class="brand-pill">Camiones</span>
+                        <span class="brand-pill">Universal</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cat-card reveal">
+                <div class="cat-img">
+                    <img src="assets/catalogo/herramientas.jpg" alt="Tornillería, Herramientas y Bicicletas">
+                    <div class="cat-img-overlay"></div>
+                    <div class="cat-img-icon"><i class="fas fa-nut-bolt"></i></div>
+                </div>
+                <div class="cat-body">
+                    <h5>Tornillería, Herramientas y Bicicletas</h5>
+                    <ul>
+                        <li><strong>Tornillería:</strong> Rosca ordinaria y fina de grado automotriz.</li>
+                        <li><strong>Transmisión:</strong> Cruces de cardán y solenoides de arranque.</li>
+                        <li><strong>Bicicletas Maya Tour</strong> — distribuidores oficiales.</li>
+                    </ul>
+                    <div class="brand-pills">
+                        <span class="brand-pill">Maya Tour</span>
+                        <span class="brand-pill">Stanley</span>
+                        <span class="brand-pill">Tramontina</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<div class="brands-section">
+    <p class="brands-label">Marcas que distribuimos</p>
+    <div style="overflow:hidden;">
+        <div class="marquee-track">
+            <span class="brand-logo-item">Delo Chevron<span class="brand-sep">◆</span></span>
+            <span class="brand-logo-item">Castrol<span class="brand-sep">◆</span></span>
+            <span class="brand-logo-item">Shell<span class="brand-sep">◆</span></span>
+            <span class="brand-logo-item">Motul<span class="brand-sep">◆</span></span>
+            <span class="brand-logo-item">Mobil Delvac<span class="brand-sep">◆</span></span>
+            <span class="brand-logo-item">Ursa<span class="brand-sep">◆</span></span>
+            <span class="brand-logo-item">Havoline<span class="brand-sep">◆</span></span>
+            <span class="brand-logo-item">Quaker State<span class="brand-sep">◆</span></span>
+            <span class="brand-logo-item">Maya Tour<span class="brand-sep">◆</span></span>
+            <span class="brand-logo-item">Eurol<span class="brand-sep">◆</span></span>
+            <span class="brand-logo-item">Delo Chevron<span class="brand-sep">◆</span></span>
+            <span class="brand-logo-item">Castrol<span class="brand-sep">◆</span></span>
+            <span class="brand-logo-item">Shell<span class="brand-sep">◆</span></span>
+            <span class="brand-logo-item">Motul<span class="brand-sep">◆</span></span>
+            <span class="brand-logo-item">Mobil Delvac<span class="brand-sep">◆</span></span>
+            <span class="brand-logo-item">Ursa<span class="brand-sep">◆</span></span>
+            <span class="brand-logo-item">Havoline<span class="brand-sep">◆</span></span>
+            <span class="brand-logo-item">Quaker State<span class="brand-sep">◆</span></span>
+            <span class="brand-logo-item">Maya Tour<span class="brand-sep">◆</span></span>
+            <span class="brand-logo-item">Eurol<span class="brand-sep">◆</span></span>
+        </div>
+    </div>
+</div>
+
+<div class="contact-strip">
+    <div class="contact-inner">
+        <div>
+            <h2>¿Necesitas un repuesto<br><span>ahora mismo?</span></h2>
+            <p>Escríbenos directo a WhatsApp y te respondemos de inmediato.</p>
+        </div>
+        <div class="contact-actions">
+            <a href="https://wa.me/50238974966" target="_blank" class="btn-wa" style="justify-content:center;">
+                <i class="fab fa-whatsapp"></i> Chatear ahora
+            </a>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div class="footer-grid">
+        <div class="footer-brand">
+            <strong>Repuestos Polochic</strong>
+            <p>Negocio con más de 40 años sirviendo al sector automotriz y de transporte de Telemán y el Valle del Polochic.</p>
+        </div>
+        <div class="footer-col">
+            <h6>Navegación</h6>
+            <ul>
+                <li><a href="#nosotros"><i class="fas fa-chevron-right"></i> Nosotros</a></li>
+                <li><a href="#servicios"><i class="fas fa-chevron-right"></i> Servicios</a></li>
+                <li><a href="#catalogo"><i class="fas fa-chevron-right"></i> Catálogo</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h6>Contacto</h6>
+            <ul>
+                <li><span><i class="fas fa-map-marker-alt"></i> Telemán, Panzós, Alta Verapaz. Calle principal, frente a agencias WAY.</span></li>
+                <li><a href="https://wa.me/50238974966"><i class="fab fa-whatsapp"></i> +502 3897-4966</a></li>
+                <li><span><i class="fas fa-clock"></i> Lun–Sáb: 7:00 AM – 5:00 PM</span></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>© 2026 Repuestos Polochic. Todos los derechos reservados.</p>
+        <p>Telemán · Alta Verapaz · Guatemala</p>
+    </div>
+</footer>
+
+<a href="https://wa.me/50238974966" target="_blank" class="float-wa" title="Contactar por WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+</a>
+
+<script>
+    // Hamburger menu
+    const btn = document.getElementById('hbtn');
+    const nav = document.getElementById('nav');
+    btn.addEventListener('click', () => nav.classList.toggle('open'));
+
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries) => {
+        entries.forEach((e, i) => {
+            if (e.isIntersecting) {
+                setTimeout(() => e.target.classList.add('visible'), i * 80);
+                io.unobserve(e.target);
+            }
+        });
+    }, { threshold: 0.1 });
+    reveals.forEach(r => io.observe(r));
+
+    // Active nav on scroll
+    const sections = document.querySelectorAll('section[id], header[id]');
+    const navLinks = document.querySelectorAll('nav a');
+    window.addEventListener('scroll', () => {
+        let cur = '';
+        sections.forEach(s => {
+            if (window.scrollY >= s.offsetTop - 100) cur = s.id;
+        });
+        navLinks.forEach(a => {
+            a.classList.remove('active-nav');
+            if (a.getAttribute('href') === '#' + cur) a.classList.add('active-nav');
+        });
+    });
+</script>
+</body>
+</html>
