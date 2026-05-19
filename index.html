@@ -98,6 +98,7 @@
         }
         nav a.btn-cta:hover { background: var(--yellow2); }
 
+        /* hamburger */
         .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
         .hamburger span {
             display: block; width: 24px; height: 2px;
@@ -166,16 +167,17 @@
             display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;
             animation: fadeUp .7s .3s ease both;
         }
-        .btn-wa {
+        .btn-call {
             display: inline-flex; align-items: center; gap: 10px;
-            background: #25d366; color: var(--white);
+            background: var(--yellow); color: var(--dark);
             font-family: 'Barlow Condensed', sans-serif;
             font-size: 1rem; font-weight: 700; letter-spacing: 1px;
             text-decoration: none; padding: 14px 28px; border-radius: 6px;
             transition: transform .2s, background .2s;
-            box-shadow: 0 8px 20px rgba(37,211,102,.35);
+            box-shadow: 0 8px 20px rgba(245,167,0,.25);
         }
-        .btn-wa:hover { transform: translateY(-3px); background: #1fb855; }
+        .btn-call:hover { transform: translateY(-3px); background: var(--yellow2); }
+        
         .btn-sec {
             display: inline-flex; align-items: center; gap: 10px;
             background: transparent;
@@ -389,6 +391,9 @@
             color: var(--blue); text-transform: uppercase;
             letter-spacing: .5px; margin-bottom: 14px;
         }
+        .catalog-grid h5 i {
+            color: var(--yellow); margin-right: 6px;
+        }
         .cat-body ul { list-style: none; }
         .cat-body ul li {
             display: flex; align-items: flex-start; gap: 8px;
@@ -512,25 +517,25 @@
         }
         .footer-bottom p { font-size: .8rem; color: #374151; }
 
-        /* ─── FLOATING WA BUTTON ─── */
-        .float-wa {
+        /* ─── FLOATING CALL BUTTON (Reemplazo de WA) ─── */
+        .float-call {
             position: fixed; bottom: 28px; right: 28px;
             width: 58px; height: 58px;
-            background: #25d366;
+            background: var(--blue2);
             border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
-            font-size: 1.6rem; color: var(--white);
+            font-size: 1.4rem; color: var(--white);
             text-decoration: none;
-            box-shadow: 0 4px 20px rgba(37,211,102,.45);
+            box-shadow: 0 4px 20px rgba(15,84,153,.35);
             z-index: 900;
             transition: transform .2s, background .2s;
-            animation: pulse 2.5s infinite;
+            animation: pulseCall 2.5s infinite;
         }
-        .float-wa:hover { transform: scale(1.1); background: #1fb855; }
+        .float-call:hover { transform: scale(1.1); background: var(--blue); }
 
-        @keyframes pulse {
-            0%,100% { box-shadow: 0 4px 20px rgba(37,211,102,.45); }
-            50%      { box-shadow: 0 4px 30px rgba(37,211,102,.7); }
+        @keyframes pulseCall {
+            0%,100% { box-shadow: 0 4px 20px rgba(15,84,153,.35); }
+            50%      { box-shadow: 0 4px 30px rgba(15,84,153,.6); }
         }
 
         /* ─── ANIMATIONS ─── */
@@ -582,8 +587,8 @@
             <a href="#nosotros">Nosotros</a>
             <a href="#servicios">Servicios</a>
             <a href="#catalogo">Catálogo</a>
-            <a href="https://wa.me/50238974966" target="_blank" class="btn-cta">
-                <i class="fab fa-whatsapp"></i> WhatsApp
+            <a href="tel:+50240697848" class="btn-cta">
+                <i class="fas fa-phone"></i> Llamar
             </a>
         </nav>
     </div>
@@ -596,8 +601,8 @@
         <h1>Tu Repuesto<br><em>Siempre Disponible</em></h1>
         <p class="hero-sub">Líderes en la venta de repuestos para vehículo medio, pesado, lubricantes y bicicletas desde hace más de 40 años.</p>
         <div class="hero-actions">
-            <a href="https://wa.me/50238974966" target="_blank" class="btn-wa">
-                <i class="fab fa-whatsapp"></i> Consultar por WhatsApp
+            <a href="tel:+50240697848" class="btn-call">
+                <i class="fas fa-phone"></i> Llamar Ahora
             </a>
             <a href="#catalogo" class="btn-sec">
                 <i class="fas fa-th-large"></i> Ver Catálogo
@@ -875,11 +880,11 @@
     <div class="contact-inner">
         <div>
             <h2>¿Necesitas un repuesto<br><span>ahora mismo?</span></h2>
-            <p>Escríbenos directo a WhatsApp y te respondemos de inmediato.</p>
+            <p>Llámanos directo a nuestra línea de atención y te confirmamos disponibilidad.</p>
         </div>
         <div class="contact-actions">
-            <a href="https://wa.me/50238974966" target="_blank" class="btn-wa" style="justify-content:center;">
-                <i class="fab fa-whatsapp"></i> Chatear ahora
+            <a href="tel:+50240697848" class="btn-call" style="justify-content:center;">
+                <i class="fas fa-phone"></i> Llamar ahora
             </a>
         </div>
     </div>
@@ -903,7 +908,7 @@
             <h6>Contacto</h6>
             <ul>
                 <li><span><i class="fas fa-map-marker-alt"></i> Telemán, Panzós, Alta Verapaz. Calle principal, frente a agencias WAY.</span></li>
-                <li><a href="https://wa.me/50238974966"><i class="fab fa-whatsapp"></i> +502 4069-7848</a></li>
+                <li><a href="tel:+50240697848"><i class="fas fa-phone"></i> +502 4069-7848</a></li>
                 <li><span><i class="fas fa-clock"></i> Lun–Sáb: 7:00 AM – 5:00 PM</span></li>
             </ul>
         </div>
@@ -914,8 +919,8 @@
     </div>
 </footer>
 
-<a href="https://wa.me/50238974966" target="_blank" class="float-wa" title="Contactar por WhatsApp">
-    <i class="fab fa-whatsapp"></i>
+<a href="tel:+50240697848" class="float-call" title="Llamar a Repuestos Polochic">
+    <i class="fas fa-phone"></i>
 </a>
 
 <script>
